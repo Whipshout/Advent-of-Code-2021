@@ -12,9 +12,10 @@ pub fn read_file(path: &str) -> Result<String, std::io::Error> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::fs::remove_file;
     use std::io::Write;
+
+    use super::*;
 
     fn create_and_populate_file(text: &str, path: &str) -> Result<(), std::io::Error> {
         let mut buffer = File::create(path)?;
@@ -41,8 +42,8 @@ mod tests {
     fn read_file_panics_with_incorrect_file() {
         let path = "test_file_invalid.txt";
 
-        let result = std::panic::catch_unwind(|| read_file(path));
+        let result = read_file(path);
 
-        assert!(result.unwrap().is_err());
+        assert!(result.is_err());
     }
 }
