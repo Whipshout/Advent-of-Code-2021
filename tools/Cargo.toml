@@ -1,0 +1,8 @@
+[package]
+name = "tools"
+version = "0.0.1"
+authors = ["Eduardo Sánchez <whipshout@gmail.com>"]
+description = "Tools for advent of code 2021"
+edition = "2021"
+
+[dependencies]
