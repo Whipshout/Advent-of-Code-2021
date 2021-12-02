@@ -2,4 +2,5 @@
 members = [
     "tools",
     "day01",
+    "day02"
 ]

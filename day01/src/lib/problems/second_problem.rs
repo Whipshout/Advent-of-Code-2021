@@ -3,8 +3,8 @@ pub fn solve_second_problem(data: &[i32]) -> i32 {
     let mut increased_times = 0;
 
     while let Some(element) = data_windows.next() {
-        let element: i32 = element.iter().sum();
         if let Some(next_element) = data_windows.peek() {
+            let element: i32 = element.iter().sum();
             let next_element: i32 = next_element.iter().sum();
             if next_element > element {
                 increased_times += 1;
