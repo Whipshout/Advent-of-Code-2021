@@ -26,6 +26,14 @@ mod tests {
     use super::*;
 
     #[test]
+    fn parse_string_chars_vector_works_fine() {
+        let s = "aa\nbb\ncc".to_string();
+        let chars = parse_string_to_char_vector(s);
+
+        assert_eq!(chars, [['a', 'a'], ['b', 'b'], ['c', 'c']]);
+    }
+
+    #[test]
     fn parse_string_vector_works_fine_with_valid_data() {
         let s = "1\n2\n3".to_string();
         let numbers = parse_string_to_int_vector(s);
