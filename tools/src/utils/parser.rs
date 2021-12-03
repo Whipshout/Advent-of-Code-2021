@@ -10,6 +10,13 @@ pub fn parse_string_to_int_vector(s: String) -> Vec<i32> {
         .collect()
 }
 
+pub fn parse_string_to_char_vector(s: String) -> Vec<Vec<char>> {
+    s.lines()
+        .into_iter()
+        .map(|s| s.chars().collect::<Vec<char>>())
+        .collect::<Vec<Vec<char>>>()
+}
+
 pub fn parse_string(s: &str) -> Result<i32, ParseIntError> {
     s.parse::<i32>()
 }
