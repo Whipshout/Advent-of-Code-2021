@@ -15,7 +15,7 @@ pub fn parse_string(s: &str) -> Result<i32, ParseIntError> {
 }
 
 #[cfg(test)]
-mod tests {F
+mod tests {
     use super::*;
 
     #[test]
