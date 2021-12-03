@@ -3,7 +3,10 @@ use std::num::ParseIntError;
 pub fn parse_string_to_int_vector(s: String) -> Vec<i32> {
     s.lines()
         .into_iter()
-        .map(|s| parse_string(s).expect("Error parsing value"))
+        .map(|s| match parse_string(s) {
+            Ok(n) => n,
+            Err(_) => panic!("Cannot parse some element"),
+        })
         .collect()
 }
 
@@ -12,7 +15,7 @@ pub fn parse_string(s: &str) -> Result<i32, ParseIntError> {
 }
 
 #[cfg(test)]
-mod tests {
+mod tests {F
     use super::*;
 
     #[test]

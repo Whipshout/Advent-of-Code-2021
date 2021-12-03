@@ -7,7 +7,10 @@ pub fn solve_first_problem(s: &str) -> Result<i32, Box<dyn Error>> {
     let mut map = HashMap::new();
 
     for line in s.lines().into_iter() {
-        let (key, value) = line.trim().split_once(" ").expect("Error split");
+        let (key, value) = match line.trim().split_once(" ") {
+            Some((key, value)) => (key, value),
+            None => panic!("Cannot split lines"),
+        };
 
         *map.entry(key).or_insert(0) += parse_string(value)?;
     }

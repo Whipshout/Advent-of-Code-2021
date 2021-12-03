@@ -7,7 +7,7 @@ pub fn solve_second_problem(s: &str) -> Result<isize, Box<dyn Error>> {
     let mut map = HashMap::new();
 
     for line in s.lines().into_iter() {
-        let (key, value) = match line.split_once(" ") {
+        let (key, value) = match line.trim().split_once(" ") {
             Some((key, value)) => (key, value),
             None => panic!("Cannot split lines"),
         };
