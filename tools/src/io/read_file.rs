@@ -1,13 +1,14 @@
+use std::error::Error;
 use std::fs::File;
 use std::io::Read;
 
-pub fn read_file(path: &str) -> Result<String, std::io::Error> {
+pub fn read_file(path: &str) -> Result<String, Box<dyn Error>> {
     let mut file = File::open(&path)?;
     let file_len = file.metadata()?.len();
     let mut file_contents = Vec::with_capacity(file_len as usize + 1);
     file.read_to_end(&mut file_contents)?;
 
-    Ok(String::from_utf8(file_contents).expect("Error parsing file content"))
+    Ok(String::from_utf8(file_contents)?)
 }
 
 #[cfg(test)]
@@ -29,11 +30,11 @@ mod tests {
         let path = "test_file.txt";
         let text = "Hello world!";
 
-        create_and_populate_file(text, path).expect("Error creating file");
+        create_and_populate_file(text, path).unwrap();
 
-        let file_text = read_file(path).expect("Error reading file");
+        let file_text = read_file(path).unwrap();
 
-        remove_file(path).expect("Error removing file");
+        remove_file(path).unwrap();
 
         assert_eq!(file_text, text);
     }
