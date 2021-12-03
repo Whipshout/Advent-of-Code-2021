@@ -39,7 +39,7 @@ mod tests {
     }
 
     #[test]
-    fn read_file_panics_with_incorrect_file() {
+    fn read_file_error_with_invalid_path() {
         let path = "test_file_invalid.txt";
 
         let result = read_file(path);

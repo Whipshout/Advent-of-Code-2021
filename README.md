@@ -14,6 +14,6 @@
 
 ## Summary
 
-Day 1
+Day 2
 
-![Performance](./resources/day01.PNG)
+![Performance](./resources/day02.PNG)

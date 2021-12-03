@@ -1,7 +1,7 @@
 use day02::run;
 
-// ------------- First problem => Result: 1754 --------------
-// ------------- Second problem => Result: 1789 -------------
+// ------------- First problem => Result: 1938402 --------------
+// ------------- Second problem => Result: 1947878632 -------------
 fn main() {
     let (first_problem, second_problem) = run("day02/input.txt").expect("Something went wrong");
 
