@@ -16,4 +16,4 @@
 
 Day 2
 
-![Performance](./resources/day02.PNG)
+![Stats](./resources/stats.png)
