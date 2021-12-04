@@ -14,6 +14,6 @@
 
 ## Summary
 
-Day 3
+Day 4
 
-![Stats](./resources/img.png)
+![Stats](./resources/img_1.png)
