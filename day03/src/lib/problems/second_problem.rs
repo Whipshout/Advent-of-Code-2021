@@ -1,59 +1,48 @@
-use tools::utils::parse_binary;
+use tools::utils::{parse_binary, parse_string};
 
 pub fn solve_second_problem(data: Vec<&Vec<char>>) -> isize {
-    let oxygen = check_oxygen(data.clone(), 0);
-    let co2 = check_co2(data.clone(), 0);
-
-    oxygen * co2
+    check_data(data.clone(), data.clone(), 0)
 }
 
-fn check_oxygen(data: Vec<&Vec<char>>, i: i32) -> isize {
-    let mut count = 0;
-    let mut temp_vector = vec![];
+fn check_data(oxygen_data: Vec<&Vec<char>>, co2_data: Vec<&Vec<char>>, i: i32) -> isize {
+    let mut count_oxygen = 0;
+    let mut count_co2 = 0;
+    let mut oxygen_vector = vec![];
+    let mut co2_vector = vec![];
 
-    for d in data.iter() {
-        count += d[i as usize].to_string().parse::<i32>().unwrap();
+    for d in oxygen_data.iter() {
+        count_oxygen += parse_string(d[i as usize].to_string()).unwrap();
     }
 
-    data.iter().for_each(|&x| {
-        if count >= data.len() as i32 / 2 {
-            if x[i as usize] == '1' {
-                temp_vector.push(x);
+    for &data in oxygen_data.iter() {
+        if count_oxygen >= oxygen_data.len() as i32 / 2 {
+            if data[i as usize] == '1' {
+                oxygen_vector.push(data);
             }
-        } else if x[i as usize] == '0' {
-            temp_vector.push(x);
+        } else if data[i as usize] == '0' {
+            oxygen_vector.push(data);
         }
-    });
-
-    if temp_vector.len() == 1 {
-        parse_binary(temp_vector[0].iter().collect::<String>().as_str()).unwrap()
-    } else {
-        check_oxygen(temp_vector, i + 1)
-    }
-}
-
-fn check_co2(data: Vec<&Vec<char>>, i: i32) -> isize {
-    let mut count = 0;
-    let mut temp_vector = vec![];
-
-    for d in data.iter() {
-        count += d[i as usize].to_string().parse::<i32>().unwrap();
     }
 
-    data.iter().for_each(|&x| {
-        if count >= data.len() as i32 / 2 {
-            if x[i as usize] == '0' {
-                temp_vector.push(x);
+    for d in co2_data.iter() {
+        count_co2 += parse_string(d[i as usize].to_string()).unwrap();
+    }
+
+    for &data in co2_data.iter() {
+        if count_co2 >= co2_data.len() as i32 / 2 {
+            if data[i as usize] == '0' {
+                co2_vector.push(data);
             }
-        } else if x[i as usize] == '1' {
-            temp_vector.push(x);
+        } else if data[i as usize] == '1' {
+            co2_vector.push(data);
         }
-    });
+    }
 
-    if temp_vector.len() == 1 {
-        parse_binary(temp_vector[0].iter().collect::<String>().as_str()).unwrap()
+    if oxygen_vector.len() == 1 && co2_vector.len() == 1 {
+        parse_binary(oxygen_vector[0].iter().collect::<String>()).unwrap()
+            * parse_binary(co2_vector[0].iter().collect::<String>()).unwrap()
     } else {
-        check_co2(temp_vector, i + 1)
+        check_data(oxygen_vector, co2_vector, i + 1)
     }
 }
 
