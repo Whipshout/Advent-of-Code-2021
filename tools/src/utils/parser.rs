@@ -17,8 +17,12 @@ pub fn parse_string_to_char_vector(s: String) -> Vec<Vec<char>> {
         .collect::<Vec<Vec<char>>>()
 }
 
-pub fn parse_string(s: &str) -> Result<i32, ParseIntError> {
-    s.parse::<i32>()
+pub fn parse_string<N: AsRef<str>>(s: N) -> Result<i32, ParseIntError> {
+    s.as_ref().parse::<i32>()
+}
+
+pub fn parse_binary<N: AsRef<str>>(s: N) -> Result<isize, ParseIntError> {
+    isize::from_str_radix(s.as_ref(), 2)
 }
 
 #[cfg(test)]
@@ -61,6 +65,22 @@ mod tests {
     fn parse_string_error_with_invalid_data() {
         let s = "a";
         let result = parse_string(s);
+
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn parse_binary_works_fine_with_valid_data() {
+        let s = "101111111011";
+        let number = parse_binary(s).unwrap();
+
+        assert_eq!(number, 3067);
+    }
+
+    #[test]
+    fn parse_binary_error_with_invalid_data() {
+        let s = "aaaaaaa";
+        let result = parse_binary(s);
 
         assert!(result.is_err());
     }
