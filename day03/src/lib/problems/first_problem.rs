@@ -1,42 +1,37 @@
-use std::cmp::Ordering;
+use tools::utils::parse_binary;
 
-use tools::utils::{parse_binary, parse_string};
+const WIDTH: usize = 12;
+const COUNT: usize = 1000;
 
-pub fn solve_first_problem(data: Vec<&Vec<char>>) -> isize {
-    let mut numbers = vec![];
-
-    for n in 0..12 {
-        let mut count = 0;
-
-        for d in data.iter() {
-            count += parse_string(d[n].to_string()).unwrap();
-        }
-
-        match count.cmp(&(data.len() as i32 / 2)) {
-            Ordering::Less => numbers.push("0"),
-            Ordering::Equal => (),
-            Ordering::Greater => numbers.push("1"),
-        }
-    }
-
-    let gamma = parse_binary(numbers.join("")).unwrap();
+pub fn solve_first_problem(data: String) -> usize {
+    let gamma = data
+        .lines()
+        .map(|line| parse_binary(line).unwrap())
+        .fold(vec![0; WIDTH], |count, bits| {
+            count
+                .into_iter()
+                .enumerate()
+                .map(|(i, n)| n + ((bits & 1 << i) >> i))
+                .collect()
+        })
+        .into_iter()
+        .enumerate()
+        .map(|(i, b)| ((b >= COUNT / 2) as u32) << i)
+        .sum::<u32>();
     let epsilon = !gamma & ((1 << 12) - 1);
 
-    gamma * epsilon
+    (gamma * epsilon) as usize
 }
 
 #[cfg(test)]
 mod tests {
-    use tools::utils::parse_string_to_char_vector;
-
     use super::*;
 
     #[test]
     fn solve_first_problem_works() {
-        let input = "000000000000\n111111111111\n111111111111";
-        let data = parse_string_to_char_vector(input.to_string());
+        let data = "000000000000\n111111111111\n111111111111".to_string();
 
-        let result = solve_first_problem(data.iter().collect());
+        let result = solve_first_problem(data);
 
         assert_eq!(result, 0);
     }

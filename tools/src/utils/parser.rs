@@ -10,32 +10,17 @@ pub fn parse_string_to_int_vector(s: String) -> Vec<i32> {
         .collect()
 }
 
-pub fn parse_string_to_char_vector(s: String) -> Vec<Vec<char>> {
-    s.lines()
-        .into_iter()
-        .map(|s| s.chars().collect::<Vec<char>>())
-        .collect::<Vec<Vec<char>>>()
-}
-
 pub fn parse_string<N: AsRef<str>>(s: N) -> Result<i32, ParseIntError> {
     s.as_ref().parse::<i32>()
 }
 
-pub fn parse_binary<N: AsRef<str>>(s: N) -> Result<isize, ParseIntError> {
-    isize::from_str_radix(s.as_ref(), 2)
+pub fn parse_binary<N: AsRef<str>>(s: N) -> Result<usize, ParseIntError> {
+    usize::from_str_radix(s.as_ref(), 2)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn parse_string_chars_vector_works_fine() {
-        let s = "aa\nbb\ncc".to_string();
-        let chars = parse_string_to_char_vector(s);
-
-        assert_eq!(chars, [['a', 'a'], ['b', 'b'], ['c', 'c']]);
-    }
 
     #[test]
     fn parse_string_vector_works_fine_with_valid_data() {

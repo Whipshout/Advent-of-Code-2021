@@ -5,7 +5,7 @@ use tools::io::read_file;
 
 mod problems;
 
-pub fn run(path: &str) -> (usize, usize) {
+pub fn run(path: &str) -> (u32, u32) {
     let input_file = read_file(path).unwrap();
 
     let result_first_problem = solve_first_problem(input_file.clone());
