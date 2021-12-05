@@ -1,8 +1,8 @@
 [package]
-name = "day04"
+name = "day05"
 version = "1.0.0"
 authors = ["Eduardo Sánchez <whipshout@gmail.com>"]
-description = "Day 04 of advent of code 2021"
+description = "Day 05 of advent of code 2021"
 edition = "2021"
 
 [lib]
