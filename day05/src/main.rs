@@ -1,6 +1,6 @@
 use day05::run;
 
-// ------------- First problem => Result:  --------------
+// ------------- First problem => Result: 5280 --------------
 // ------------- Second problem => Result:  --------------
 fn main() {
     let (first_problem, second_problem) = run("day05/input.txt");
