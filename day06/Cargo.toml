@@ -1,0 +1,12 @@
+[package]
+name = "day06"
+version = "1.0.0"
+authors = ["Eduardo Sánchez <whipshout@gmail.com>"]
+description = "Day 06 of advent of code 2021"
+edition = "2021"
+
+[lib]
+path = "src/lib/mod.rs"
+
+[dependencies]
+tools = { path = "../tools" }

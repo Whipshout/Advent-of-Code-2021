@@ -31,5 +31,20 @@ mod tests {
     use super::*;
 
     #[test]
-    fn solve_second_problem_works() {}
+    fn solve_second_problem_works() {
+        let input = r##"456,846 -> 221,846
+980,926 -> 73,19
+682,930 -> 562,930
+766,592 -> 274,100
+247,685 -> 247,21
+106,800 -> 635,800
+953,340 -> 135,340
+293,223 -> 293,12
+454,196 -> 454,463
+886,766 -> 164,766"##
+            .to_string();
+        let result = solve_second_problem(input);
+
+        assert_eq!(result, 9);
+    }
 }
