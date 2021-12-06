@@ -1,17 +1,18 @@
-use tools::utils::parse_string;
+use crate::problems::submarine::{Direction, Submarine};
 
-pub fn solve_first_problem(s: &str) -> i32 {
-    let (forward, depth) = s.lines().map(|line| line.split_once(" ").unwrap()).fold(
-        (0, 0),
-        |(forward, depth), (key, value)| match (key, parse_string(value).unwrap()) {
-            ("forward", value) => (forward + value, depth),
-            ("down", value) => (forward, depth + value),
-            ("up", value) => (forward, depth - value),
-            _ => unreachable!(),
-        },
-    );
+pub fn solve_first_problem(input: &str) -> i32 {
+    let input: Vec<_> = input
+        .lines()
+        .map(|line| line.parse::<Direction>())
+        .collect();
 
-    forward * depth
+    let mut submarine = Submarine::default();
+
+    for direction in input {
+        submarine.move_sub(direction.unwrap());
+    }
+
+    submarine.position()
 }
 
 #[cfg(test)]

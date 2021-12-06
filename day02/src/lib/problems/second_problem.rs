@@ -1,17 +1,18 @@
-use tools::utils::parse_string;
+use crate::problems::submarine::{Direction, Submarine};
 
-pub fn solve_second_problem(s: &str) -> isize {
-    let (forward, depth, _) = s.lines().map(|line| line.split_once(" ").unwrap()).fold(
-        (0, 0, 0),
-        |(forward, depth, aim), (key, value)| match (key, parse_string(value).unwrap()) {
-            ("forward", value) => (forward + value, depth + aim * value, aim),
-            ("down", value) => (forward, depth, aim + value),
-            ("up", value) => (forward, depth, aim - value),
-            _ => unreachable!(),
-        },
-    );
+pub fn solve_second_problem(input: &str) -> i32 {
+    let input: Vec<_> = input
+        .lines()
+        .map(|line| line.parse::<Direction>())
+        .collect();
 
-    (forward * depth) as isize
+    let mut submarine = Submarine::new(true);
+
+    for direction in input {
+        submarine.move_sub(direction.unwrap());
+    }
+
+    submarine.position()
 }
 
 #[cfg(test)]
@@ -24,6 +25,6 @@ mod tests {
             "forward 2\ndown 4\ndown 3\nup 4\ndown 1\ndown 8\nup 9\nforward 1\ndown 9\nforward 6";
         let result = solve_second_problem(data);
 
-        assert_eq!(result, 675_isize);
+        assert_eq!(result, 675);
     }
 }
