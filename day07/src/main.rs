@@ -1,7 +1,7 @@
-use day04::run;
+use day07::run;
 
-// ------------- First problem => Result: 39984 --------------
-// ------------- Second problem => Result: 8468 --------------
+// ------------- First problem => Result:  --------------
+// ------------- Second problem => Result:  -------------
 fn main() {
     let input = include_str!("input.txt");
     let (first_problem, second_problem) = run(input);

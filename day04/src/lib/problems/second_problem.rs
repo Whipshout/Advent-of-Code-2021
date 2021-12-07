@@ -1,29 +1,19 @@
-use std::collections::HashMap;
+use crate::problems::bingo::Bingo;
 
 const ROW: u32 = 0b11111;
 const COL: u32 = 0b100001000010000100001;
 
-pub fn solve_second_problem(data: String) -> u32 {
-    let (nums, boards) = data.split_once("\n\r").unwrap();
+pub fn solve_second_problem(input: &str) -> u32 {
+    let (nums, boards) = input.split_once("\n\r").unwrap();
 
-    let mut boards: Vec<(HashMap<u8, usize>, u32)> = boards
-        .split("\n\r")
-        .map(|b| {
-            (
-                b.split_whitespace()
-                    .enumerate()
-                    .map(|(i, n)| (n.parse().unwrap(), i))
-                    .collect(),
-                0,
-            )
-        })
-        .collect();
+    let mut bingo = Bingo::new(nums, boards);
 
-    let (board, mark, num) = nums
-        .split(',')
-        .map(|n| n.trim().parse().unwrap())
+    let (board, mark, num) = bingo
+        .numbers
+        .into_iter()
         .filter_map(|n| {
-            boards
+            bingo
+                .boards
                 .drain_filter(|(b, m)| {
                     b.get(&n)
                         .map(|i| *m |= 1 << *i)
@@ -36,21 +26,16 @@ pub fn solve_second_problem(data: String) -> u32 {
         .last()
         .unwrap();
 
-    board
-        .into_iter()
-        .map(|(n, i)| (mark >> i & 1 ^ 1) * n as u32 * num as u32)
-        .sum::<u32>()
+    Bingo::calculate_winner(board, mark, num)
 }
 
 #[cfg(test)]
 mod tests {
-    use tools::io::read_file;
-
     use super::*;
 
     #[test]
     fn solve_second_problem_works() {
-        let data = read_file("input_test.txt").unwrap();
+        let data = include_str!("input_test.txt");
         let result = solve_second_problem(data);
 
         assert_eq!(result, 12035);
