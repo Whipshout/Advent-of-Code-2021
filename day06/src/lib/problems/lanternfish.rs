@@ -12,8 +12,7 @@ impl Pool {
     }
 
     pub fn complete_cycles(&mut self, times: usize) {
-        let pool = self;
-        (1..times).for_each(|day| pool.0[(day + 7) % 9] += pool.0[day % 9]);
+        (1..times).for_each(|day| self.0[(day + 7) % 9] += self.0[day % 9]);
     }
 
     pub fn total_count(&self) -> isize {
