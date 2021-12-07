@@ -17,13 +17,6 @@ pub fn solve_second_problem(input: &str) -> i32 {
     crabs.lowest_fuel
 }
 
-fn calculate_fuel(positions: Vec<i32>, n: i32) -> i32 {
-    positions.into_iter().fold(0, |sum, val| {
-        let steps = (val - n).abs();
-        sum + (0..=steps).sum::<i32>()
-    })
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

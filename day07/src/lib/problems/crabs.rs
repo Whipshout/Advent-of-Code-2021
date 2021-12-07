@@ -7,7 +7,7 @@ impl Crabs {
     pub fn new(positions: Vec<i32>) -> Self {
         Self {
             positions,
-            lowest_fuel: 2000000000,
+            lowest_fuel: 0,
         }
     }
 
