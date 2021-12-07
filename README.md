@@ -16,4 +16,4 @@
 
 Day 4
 
-![Stats](./resources/img_1.png)
+![Stats](./resources/img.png)

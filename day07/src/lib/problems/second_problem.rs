@@ -1,5 +1,7 @@
 use std::str::FromStr;
 
+use crate::problems::crabs::Crabs;
+
 pub fn solve_second_problem(input: &str) -> i32 {
     let positions: Vec<_> = input
         .split(',')
@@ -7,19 +9,12 @@ pub fn solve_second_problem(input: &str) -> i32 {
         .map(|n| i32::from_str(n).unwrap())
         .collect();
 
-    let max = positions.iter().max().unwrap();
+    let mut crabs = Crabs::new(positions);
+    let max = crabs.max_position();
 
-    let mut temp_fuel = 2000000000;
+    crabs.calculate_lowest_fuel(max, true);
 
-    (0..=*max).for_each(|n| {
-        let fuel = calculate_fuel(positions.clone(), n);
-
-        if fuel < temp_fuel {
-            temp_fuel = fuel;
-        }
-    });
-
-    temp_fuel
+    crabs.lowest_fuel
 }
 
 fn calculate_fuel(positions: Vec<i32>, n: i32) -> i32 {
