@@ -29,17 +29,15 @@ impl Crabs {
     }
 
     pub fn calculate_lowest_fuel(&mut self, max: i32, is_exponential: bool) {
-        self.lowest_fuel = (0..=max).fold(self.lowest_fuel, |lowest_fuel, n| {
-            let fuel = match is_exponential {
-                true => Crabs::calculate_fuel_exponential(self, n),
-                false => Crabs::calculate_fuel(self, n),
-            };
-
-            if fuel < lowest_fuel {
-                fuel
-            } else {
-                lowest_fuel
-            }
-        });
+        self.lowest_fuel = (0..=max)
+            .map(|n| {
+                if is_exponential {
+                    Crabs::calculate_fuel_exponential(self, n)
+                } else {
+                    Crabs::calculate_fuel(self, n)
+                }
+            })
+            .min()
+            .unwrap();
     }
 }
