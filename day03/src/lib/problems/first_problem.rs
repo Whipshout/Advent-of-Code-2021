@@ -3,8 +3,8 @@ use tools::utils::parse_binary;
 const WIDTH: usize = 12;
 const COUNT: usize = 1000;
 
-pub fn solve_first_problem(data: String) -> usize {
-    let gamma = data
+pub fn solve_first_problem(input: &str) -> usize {
+    let gamma = input
         .lines()
         .map(|line| parse_binary(line).unwrap())
         .fold(vec![0; WIDTH], |count, bits| {
@@ -29,7 +29,7 @@ mod tests {
 
     #[test]
     fn solve_first_problem_works() {
-        let data = "000000000000\n111111111111\n111111111111".to_string();
+        let data = "000000000000\n111111111111\n111111111111";
 
         let result = solve_first_problem(data);
 
