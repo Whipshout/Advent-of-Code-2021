@@ -1,12 +1,11 @@
-pub fn solve_first_problem(data: String) -> usize {
-    let mut map = data.split(',').fold([0; 9], |mut map, n| {
-        map[n.parse::<usize>().unwrap()] += 1;
-        map
-    });
+use crate::problems::lanternfish::Pool;
 
-    (1..80).for_each(|day| map[(day + 7) % 9] += map[day % 9]);
+pub fn solve_first_problem(input: &str) -> isize {
+    let mut pool = Pool::create_pool(input);
 
-    map.iter().sum::<usize>()
+    pool.complete_cycles(80);
+
+    pool.total_count()
 }
 
 #[cfg(test)]
@@ -15,7 +14,7 @@ mod tests {
 
     #[test]
     fn solve_first_problem_works() {
-        let input = "4,3,4,5,2,1,1,5,5,3,3,1,5,1,4,2,2,3,1,5,1,4,1,2".to_string();
+        let input = "4,3,4,5,2,1,1,5,5,3,3,1,5,1,4,2,2,3,1,5,1,4,1,2";
         let result = solve_first_problem(input);
 
         assert_eq!(result, 28073);
